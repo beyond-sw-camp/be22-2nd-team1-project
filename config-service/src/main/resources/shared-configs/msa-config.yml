@@ -1,0 +1,39 @@
+# ===================================
+# Config Server - MSA Service Common Settings (msa-config)
+# Database and security settings shared by business logic services
+# (Sensitive info excluded - managed in msa-config-dev.yml or msa-config-prd.yml)
+# ===================================
+
+spring:
+  # Database driver settings
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+
+  # JPA settings
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MariaDBDialect
+ 
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+# Logging level settings
+logging:
+  level:
+    root: INFO
+    com.mycompany: DEBUG
+
+# Swagger(SpringDoc) settings
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
