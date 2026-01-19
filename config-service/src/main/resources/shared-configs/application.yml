@@ -1,0 +1,32 @@
+# ===================================
+# Config Server - Default Application Settings (application.yml)
+# Environment settings inherited by all microservices unconditionally
+# ===================================
+
+server:
+  # Each service uses random port (0) by default for development
+  port: ${PORT:0}
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+spring:
+  profiles:
+    # [Master Switch] Determines the default profile for all services
+    # Change this value to 'prd' when switching to production environment
+    active: dev
+  cloud:
+    # Version compatibility check disabled (common)
+    compatibility-verifier:
+      enabled: false
+
+gateway:
+  url: http://localhost:8000
+
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"

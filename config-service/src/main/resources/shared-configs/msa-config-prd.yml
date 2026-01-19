@@ -1,0 +1,11 @@
+# Production environment sensitive information (Do not upload to Git)
+# Should be ignored by .gitignore: *-prd.yml
+
+spring:
+  datasource:
+    url: jdbc:mariadb://production-db-server:3306/schoolmate_prod
+    username: ${DB_USERNAME}  # Recommended to use environment variables
+    password: ${DB_PASSWORD}  # Recommended to use environment variables
+
+jwt:
+  secret: ${JWT_SECRET}  # Inject via environment variable for security

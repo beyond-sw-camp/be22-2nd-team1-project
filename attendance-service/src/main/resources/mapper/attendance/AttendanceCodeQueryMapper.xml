@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mycompany.project.attendance.query.repository.AttendanceCodeQueryMapper">
+
+    <!-- Get single attendance code detail -->
+    <select id="findById" parameterType="long"
+            resultType="com.mycompany.project.attendance.query.application.dto.AttendanceCodeResponse">
+        SELECT
+        attendance_code_id AS attendanceCodeId,
+        code               AS code,
+        name               AS name,
+        is_excused         AS excused,
+        is_active          AS active,
+        created_at         AS createdAt,
+        updated_at         AS updatedAt
+        FROM tbl_attendance_code
+        WHERE attendance_code_id = #{attendanceCodeId}
+    </select>
+
+    <!-- Get all attendance codes -->
+    <select id="findAll"
+            resultType="com.mycompany.project.attendance.query.application.dto.AttendanceCodeResponse">
+        SELECT
+        attendance_code_id AS attendanceCodeId,
+        code               AS code,
+        name               AS name,
+        is_excused         AS excused,
+        is_active          AS active,
+        created_at         AS createdAt,
+        updated_at         AS updatedAt
+        FROM tbl_attendance_code
+        <where>
+            <!-- Filter by active status if activeOnly is true -->
+            <if test="activeOnly != null and activeOnly == true">
+                is_active = 1
+            </if>
+        </where>
+        ORDER BY attendance_code_id ASC
+    </select>
+
+</mapper>
